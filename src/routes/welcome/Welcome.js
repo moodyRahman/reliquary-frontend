@@ -1,16 +1,16 @@
-import Page from "../../components/Page";
 import "./Welcome.css"
+import { Link } from "react-router-dom";
 
 const Welcome = () => {
   return (
-    <Page>
+    <div>
       <div className="logo">
         Reliquary
       </div>
       <div>
-        Login
+        <Link to="/login">Login with Google</Link>
       </div>
-    </Page>
+    </div>
   );
 }
 

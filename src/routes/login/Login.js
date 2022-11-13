@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { increment } from "../../features/test/testUpdate"
+import { increment, setName } from "../../features/test/testUpdate"
 import { Link } from "react-router-dom";
 import { Form } from "react-router-dom";
 import "./Login.css"
@@ -20,12 +20,16 @@ const Login = () => {
       body: JSON.stringify({ username: username, password: password }),
     })
     const body = await res.text()
-    console.log(body) 
+    console.log(body)
   }
 
 
+
   const counter = useSelector(state => state.test.counter);
+  const name = useSelector(state => state.test.name);
   const dispatch = useDispatch()
+
+
   return (
     <div>
       <Form method="post" action="/login">
@@ -33,7 +37,8 @@ const Login = () => {
         <input type="password" placeholder="password" name="password" onChange={(e) => setPassword(e.target.value)} />
         <button onClick={sendLogin}>login</button>
       </Form>
-      <div onClick={() => { dispatch(increment()) }} >{counter}</div>
+      <div onClick={ () => { dispatch(increment()) }} >{counter}</div>
+      <div>{name}</div>
     </div>
   );
 }

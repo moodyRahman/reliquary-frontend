@@ -6,6 +6,7 @@ export const authSlice = createSlice({
         authToken: "",
         refreshToken: "",
         isLoggedIn: false,
+        oauthserver: "",
         name: ""
     },
     reducers: {
@@ -24,12 +25,10 @@ export const authSlice = createSlice({
         setName: (state, action) => {
             state.name = action.payload
         }
-
-
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = authSlice.actions
+export const { setAuth, setRefresh, logout, setName } = authSlice.actions
 
 export default authSlice.reducer

@@ -1,0 +1,17 @@
+button {
+    border: 1px solid black;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size:100%;
+    margin-left:15px;
+    width: 10%;
+    height: 50px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+input {
+    display: block;
+    padding: 15px;
+    width: 50%;
+    margin: 15px;
+}

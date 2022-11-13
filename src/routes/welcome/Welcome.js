@@ -1,6 +1,5 @@
 import "./Welcome.css"
-import { useDispatch, useSelector } from "react-redux";
-import {increment} from "../../features/test/testUpdate"
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Welcome = () => {
@@ -11,7 +10,7 @@ const Welcome = () => {
         Reliquary {counter}
       </div>
       <div>
-        <Link to="/login">Login with Google</Link>
+        <Link to="/login">Login</Link>
       </div>
     </div>
   );

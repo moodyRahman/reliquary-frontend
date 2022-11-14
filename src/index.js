@@ -13,6 +13,7 @@ import {
   Welcome, 
   Login
 } from "./routes/Routes"
+import Nav from './components/Nav';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <Nav />
       <Page>
         <RouterProvider router={router} />
       </Page>

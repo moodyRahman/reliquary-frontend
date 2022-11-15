@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { increment, setName } from "../../features/test/testUpdate"
-import { Link } from "react-router-dom";
+import { increment } from "../../features/test/testUpdate"
+import { setAuth } from "../../features/auth/authUpdate"
 import { Form } from "react-router-dom";
 import "./Login.css"
 import { useState } from "react";
@@ -27,6 +27,7 @@ const Login = () => {
 
   const counter = useSelector(state => state.test.counter);
   const name = useSelector(state => state.test.name);
+  const loggedin = useSelector(state => state.test.isLoggedIn);
   const dispatch = useDispatch()
 
 
@@ -37,8 +38,10 @@ const Login = () => {
         <input type="password" placeholder="password" name="password" onChange={(e) => setPassword(e.target.value)} />
         <button onClick={sendLogin}>login</button>
       </Form>
-      <div onClick={ () => { dispatch(increment()) }} >{counter}</div>
+      <div onClick={() => { dispatch(increment()) }} >{counter}</div>
       <div>{name}</div>
+      <div onClick={() => { dispatch(setAuth("mmmm")); console.log("dispatched") }}>test Log in</div>
+      <div>{loggedin}</div>
     </div>
   );
 }

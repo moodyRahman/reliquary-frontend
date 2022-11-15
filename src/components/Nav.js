@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import styles from "./Nav.css"
 
 const Nav = () => {
+
+    const booltostr = (x) => {
+        return x?"true":"false"
+    }
 
     const allNavs = {
         false: [
@@ -16,7 +20,7 @@ const Nav = () => {
             },
             {
                 name: "register",
-                to: "/moody"
+                to: "/register"
             }
         ],
         true:[
@@ -37,15 +41,16 @@ const Nav = () => {
 
     const loggedin = useSelector(state => state.auth.isLoggedIn);
 
-    const NavEntry = ({name, link}) => {
+
+    const NavEntry = ({name, to}) => {
         return (
-            <li>{name}</li>
+            <Link to={to}>{name}</Link>
         )
     }
 
     return (
         <nav style={styles}>
-            {loggedin?allNavs.true.map((e, i) => <NavEntry key={i} name={e.name} />):allNavs.false.map((e, i) => <NavEntry key={i} name={e.name} />) }
+            {allNavs[booltostr(loggedin)].map((e, i) => <NavEntry key={i} name={e.name} to={e.to} />)}
         </nav>
     )
 }

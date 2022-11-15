@@ -1,14 +1,19 @@
+import { Outlet } from "react-router-dom"
 import "../styles/App.css"
+import Nav from "./Nav"
 
 const page = {
     margin: "0px",
     padding: "75px",
-  }
+}
 
-const Page = ({children}) => {
+const Page = () => {
     return (
-        <div style={page}>
-            {children}
+        <div>
+            <Nav />
+            <div style={page}>
+                <Outlet />
+            </div>
         </div>
     )
 }

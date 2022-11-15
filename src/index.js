@@ -9,31 +9,31 @@ import {
 import store from './store'
 import { Provider } from 'react-redux'
 import Page from './components/Page';
-import {
-  Welcome, 
-  Login
-} from "./routes/Routes"
-import Nav from './components/Nav';
+import { Welcome, Login } from "./routes/Routes"
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Welcome />,
+    element: <Page />,
+    children: [
+      { index: true, element: <Welcome /> },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <>register page!</>,
+      },
+    ],
   },
-  {
-    path: "/login",
-    element: <Login />,
-  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Nav />
-      <Page>
-        <RouterProvider router={router} />
-      </Page>
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );

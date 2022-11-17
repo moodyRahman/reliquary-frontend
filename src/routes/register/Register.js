@@ -29,7 +29,7 @@ const Register = () => {
       },
       body: JSON.stringify({ username: username, password: password0, token: token }),
     })
-    const body = await res.text()
+    const body = await res.json()
     console.log(body)
   }
 

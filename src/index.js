@@ -9,7 +9,7 @@ import {
 import store from './store'
 import { Provider } from 'react-redux'
 import Page from './components/Page';
-import { Welcome, Login } from "./routes/Routes"
+import { Welcome, Login, Register } from "./routes/Routes"
 
 const router = createBrowserRouter([
   {
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: "register",
-        element: <>register page!</>,
+        element: <Register />,
       },
     ],
   },

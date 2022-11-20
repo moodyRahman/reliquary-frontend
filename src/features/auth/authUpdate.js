@@ -17,6 +17,9 @@ export const authSlice = createSlice({
         setRefresh: (state, action) => {
             state.refreshToken = action.payload
         },
+        setTokens:(state, action) => {
+
+        },
         logout: (state) => {
             state.isLoggedIn = false;
             state.authToken = ""

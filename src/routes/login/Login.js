@@ -3,21 +3,25 @@ import { increment } from "../../features/test/testUpdate"
 import { setAuth } from "../../features/auth/authUpdate"
 import { Form } from "react-router-dom";
 import "./Login.css"
+import captcha from "../../components/Captcha"
 import { useState } from "react";
 const Login = () => {
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  const sendLogin = async (e) => {
-    e.preventDefault();
+  const sendLogin = async (token) => {
     console.log(`${process.env.REACT_APP_BACKEND_URL}/auth/login`)
     const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username: username, password: password }),
+      body: JSON.stringify({ 
+        username: username, 
+        password: password,
+        token: token 
+      }),
     })
     const body = await res.text()
     console.log(body)
@@ -36,7 +40,7 @@ const Login = () => {
       <Form method="post" action="/login">
         <input type="text" placeholder="username" name="username" onChange={(e) => setUsername(e.target.value)} />
         <input type="password" placeholder="password" name="password" onChange={(e) => setPassword(e.target.value)} />
-        <button onClick={sendLogin}>login</button>
+        <button onClick={captcha(sendLogin)}>login</button>
       </Form>
       <div onClick={() => { dispatch(increment()) }} >{counter}</div>
       <div>{name}</div>

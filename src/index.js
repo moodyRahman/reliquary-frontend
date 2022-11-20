@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 import store from './store'
 import { Provider } from 'react-redux'
-import Page from './components/Page';
-import { Welcome, Login, Register } from "./routes/Routes"
+import Page from '@components/Page';
+import { Welcome, Login, Register } from "@routes/Routes"
 
 const router = createBrowserRouter([
   {

@@ -5,7 +5,6 @@ import { Form } from "react-router-dom";
 import "./Login.css"
 import { captcha, CaptchaInfo } from "../../components/Captcha"
 import { useState } from "react";
-import { Helmet } from "react-helmet";
 
 const Login = () => {
 
@@ -39,9 +38,6 @@ const Login = () => {
 
   return (
     <div>
-      <Helmet>
-        <script src="https://www.google.com/recaptcha/api.js?render=6LfAwBAjAAAAAALoD-IU1Qt_qeUNXMxFmjSosm2k"></script>
-      </Helmet>
       <Form method="post" action="/login">
         <input type="text" placeholder="username" name="username" onChange={(e) => setUsername(e.target.value)} />
         <input type="password" placeholder="password" name="password" onChange={(e) => setPassword(e.target.value)} />

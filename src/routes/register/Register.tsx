@@ -2,7 +2,6 @@ import { Form } from "react-router-dom";
 import "./Register.css";
 import { useState } from "react";
 import { captcha, CaptchaInfo } from "../../components/Captcha";
-import { Helmet } from "react-helmet";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -31,9 +30,6 @@ const Register = () => {
 
   return (
     <div>
-      <Helmet>
-        <script src="https://www.google.com/recaptcha/api.js?render=6LfAwBAjAAAAAALoD-IU1Qt_qeUNXMxFmjSosm2k"></script>
-      </Helmet>
       <Form>
         <input
           type="text"

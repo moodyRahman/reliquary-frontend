@@ -6,7 +6,7 @@ interface testState {
     name: string
 }
 
-const initialState = {
+const initialState: testState = {
     counter: 0,
     name: "test",
 }

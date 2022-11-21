@@ -10,3 +10,8 @@ body {
   font-family: 'JetBrains Mono', monospace;
   background-color: #dfdbd8;
 }
+
+/* https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed */
+.grecaptcha-badge {
+  display: none !important;
+}

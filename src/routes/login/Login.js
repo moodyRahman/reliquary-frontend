@@ -3,8 +3,10 @@ import { increment } from "../../features/test/testUpdate"
 import { setAuth } from "../../features/auth/authUpdate"
 import { Form } from "react-router-dom";
 import "./Login.css"
-import captcha from "../../components/Captcha"
+import { captcha, CaptchaInfo } from "../../components/Captcha"
 import { useState } from "react";
+import { Helmet } from "react-helmet";
+
 const Login = () => {
 
   const [username, setUsername] = useState("")
@@ -17,10 +19,10 @@ const Login = () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ 
-        username: username, 
+      body: JSON.stringify({
+        username: username,
         password: password,
-        token: token 
+        token: token
       }),
     })
     const body = await res.text()
@@ -37,6 +39,9 @@ const Login = () => {
 
   return (
     <div>
+      <Helmet>
+        <script src="https://www.google.com/recaptcha/api.js?render=6LfAwBAjAAAAAALoD-IU1Qt_qeUNXMxFmjSosm2k"></script>
+      </Helmet>
       <Form method="post" action="/login">
         <input type="text" placeholder="username" name="username" onChange={(e) => setUsername(e.target.value)} />
         <input type="password" placeholder="password" name="password" onChange={(e) => setPassword(e.target.value)} />
@@ -46,6 +51,7 @@ const Login = () => {
       <div>{name}</div>
       <div onClick={() => { dispatch(setAuth("mmmm")); console.log("dispatched") }}>test Log in</div>
       <div>{loggedin}</div>
+      <CaptchaInfo />
     </div>
   );
 }

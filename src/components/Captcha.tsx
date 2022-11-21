@@ -30,7 +30,7 @@ const captcha = (func: Function) => {
     e.preventDefault();
     window.grecaptcha.ready(() => {
       window.grecaptcha
-        .execute("6LfAwBAjAAAAAALoD-IU1Qt_qeUNXMxFmjSosm2k", {
+        .execute(`${process.env.REACT_APP_CAPTCHA_TOKEN}`, {
           action: "register",
         })
         .then((token) => {

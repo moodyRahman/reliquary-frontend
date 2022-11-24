@@ -6,7 +6,7 @@ interface authState {
     refreshToken: string,
     isLoggedIn: boolean,
     oauthserver: string,
-    name: string
+    username: string
 }
 
 const initialState: authState = {
@@ -14,7 +14,7 @@ const initialState: authState = {
         refreshToken: "",
         isLoggedIn: false,
         oauthserver: "",
-        name: ""
+        username: ""
 }
 
 export const authSlice = createSlice({
@@ -28,9 +28,10 @@ export const authSlice = createSlice({
         setRefresh: (state, action) => {
             state.refreshToken = action.payload
         },
-        setTokens:(state, action:PayloadAction<{refresh_token:string, access_token:string}>) => {
+        setTokens:(state, action:PayloadAction<{refresh_token:string, access_token:string, username:string}>) => {
             state.accessToken = action.payload.access_token;
             state.refreshToken = action.payload.refresh_token;
+            state.username = action.payload.username
             state.isLoggedIn = true;
 
         },
@@ -40,7 +41,7 @@ export const authSlice = createSlice({
             state.refreshToken = ""
         },
         setName: (state, action) => {
-            state.name = action.payload
+            state.username = action.payload
         }
     },
 })

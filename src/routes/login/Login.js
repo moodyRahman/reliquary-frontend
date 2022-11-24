@@ -1,15 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
+import { setAuth, setTokens } from "../../features/auth/authUpdate"
 import { increment } from "../../features/test/testUpdate"
-import { setAuth } from "../../features/auth/authUpdate"
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import "./Login.css"
 import { captcha, CaptchaInfo } from "../../components/Captcha"
 import { useState } from "react";
+import Error from "../../components/Error";
 
 const Login = () => {
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState("");
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const sendLogin = async (token) => {
     console.log(`${process.env.REACT_APP_BACKEND_URL}/auth/login`)
@@ -24,16 +29,23 @@ const Login = () => {
         token: token
       }),
     })
-    const body = await res.text()
+    const body = await res.json()
     console.log(body)
+
+    if (body.status !== 200) {
+      setError(body.message)
+      return
+    }
+    setError("loading...")
+    dispatch(setTokens({ refresh_token: body.refresh_token, access_token: body.access_token, username: body.username }))
+    navigate("/campaigns")
   }
 
-
-
-  const counter = useSelector(state => state.test.counter);
-  const name = useSelector(state => state.test.name);
-  const loggedin = useSelector(state => state.test.isLoggedIn);
-  const dispatch = useDispatch()
+  const validate = (e) => {
+    e.preventDefault()
+    setError("loading...")
+    captcha(sendLogin)
+  }
 
 
   return (
@@ -41,12 +53,11 @@ const Login = () => {
       <Form method="post" action="/login">
         <input type="text" placeholder="username" name="username" onChange={(e) => setUsername(e.target.value)} />
         <input type="password" placeholder="password" name="password" onChange={(e) => setPassword(e.target.value)} />
-        <button onClick={captcha(sendLogin)}>login</button>
+        <button onClick={validate}>login</button>
       </Form>
-      <div onClick={() => { dispatch(increment()) }} >{counter}</div>
-      <div>{name}</div>
-      <div onClick={() => { dispatch(setAuth("mmmm")); console.log("dispatched") }}>test Log in</div>
-      <div>{loggedin}</div>
+      <Error>
+        {error}
+      </Error>
       <CaptchaInfo />
     </div>
   );

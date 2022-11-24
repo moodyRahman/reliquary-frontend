@@ -49,3 +49,4 @@ export const authSlice = createSlice({
 export const { setAuth, setRefresh, logout, setName } = authSlice.actions
 
 export default authSlice.reducer
+export type { authState }

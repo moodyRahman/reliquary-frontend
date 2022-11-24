@@ -1,12 +1,20 @@
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import "./Register.css";
 import { useState } from "react";
 import { captcha, CaptchaInfo } from "../../components/Captcha";
+import { MouseEvent } from "react";
+import Error from "../../components/Error";
+import { setTokens } from "../../features/auth/authUpdate"
+import { useDispatch } from "react-redux";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password0, setPassword0] = useState("");
   const [password1, setPassword1] = useState("");
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const sendRegister = async (token: string) => {
     console.log(`${process.env.REACT_APP_BACKEND_URL}/auth/register`);
@@ -26,7 +34,27 @@ const Register = () => {
     );
     const body = await res.json();
     console.log(body);
+
+    if (body.status !== 201) {
+      setError(body.message)
+      return
+    }
+
+    setError("loading...")
+    dispatch(setTokens({refresh_token:body.refresh_token, access_token:body.access_token}))
+    navigate("/campaigns")
+
   };
+
+  const validate = (e: MouseEvent) => {
+    e.preventDefault()
+    if (password0 !== password1) {
+      setError("passwords don't match match")
+    }
+    setError("loading...")
+
+    captcha(sendRegister)
+  }
 
   return (
     <div>
@@ -49,8 +77,13 @@ const Register = () => {
           name="password1"
           onChange={(e) => setPassword1(e.target.value)}
         />
-        <button onClick={captcha(sendRegister)}>register</button>
+        <button onClick={validate}>register</button>
       </Form>
+
+      <Error>
+        {error}
+      </Error>
+
       <CaptchaInfo />
     </div>
   );

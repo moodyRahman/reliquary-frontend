@@ -27,18 +27,15 @@ interface ReCaptchaRenderOptions {
 }
 
 const captcha = (func: Function) => {
-  return (e: MouseEvent) => {
-    e.preventDefault();
-    window.grecaptcha.ready(() => {
-      window.grecaptcha
-        .execute(`${process.env.REACT_APP_CAPTCHA_TOKEN}`, {
-          action: "register",
-        })
-        .then((token) => {
-          func(token);
-        });
-    });
-  };
+  window.grecaptcha.ready(() => {
+    window.grecaptcha
+      .execute(`${process.env.REACT_APP_CAPTCHA_TOKEN}`, {
+        action: "register",
+      })
+      .then((token) => {
+        func(token);
+      });
+  });
 };
 
 const CaptchaInfo = () => {

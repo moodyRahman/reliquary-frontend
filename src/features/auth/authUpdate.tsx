@@ -28,9 +28,9 @@ export const authSlice = createSlice({
         setRefresh: (state, action) => {
             state.refreshToken = action.payload
         },
-        setTokens:(state, action:PayloadAction<{refresh:string, access:string}>) => {
-            state.accessToken = action.payload.access;
-            state.refreshToken = action.payload.refresh;
+        setTokens:(state, action:PayloadAction<{refresh_token:string, access_token:string}>) => {
+            state.accessToken = action.payload.access_token;
+            state.refreshToken = action.payload.refresh_token;
             state.isLoggedIn = true;
 
         },
@@ -46,7 +46,7 @@ export const authSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setAuth, setRefresh, logout, setName } = authSlice.actions
+export const { setAuth, setRefresh, setTokens, logout, setName } = authSlice.actions
 
 export default authSlice.reducer
 export type { authState }

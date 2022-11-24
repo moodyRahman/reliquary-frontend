@@ -26,20 +26,19 @@ const Nav = () => {
         true:[
             {
                 name: "characters",
-                to: "/"
+                to: "/characters"
             },
             {
                 name: "campaigns",
-                to: "/"
+                to: "/campaigns"
             },
             {
                 name: "waluigi",
-                to: "/"
+                to: "/waluigi"
             },
         ]
     }
 
-    const loggedin = useSelector(state => state.auth.isLoggedIn);
 
 
     const NavEntry = ({name, to}) => {
@@ -47,6 +46,8 @@ const Nav = () => {
             <Link to={to}>{name}</Link>
         )
     }
+
+    const loggedin = useSelector((state) => state.auth.isLoggedIn);
 
     return (
         <nav style={styles}>

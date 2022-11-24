@@ -5,29 +5,53 @@ import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
   RouterProvider,
+  redirect,
+  createRoutesFromElements,
+  Route
 } from "react-router-dom";
 import store from './store'
 import { Provider } from 'react-redux'
 import Page from '@components/Page';
 import { Welcome, Login, Register } from "@routes/Routes"
+import { OnlyUnauthRoutes, ProtectedRoute, ProtectedRoutes } from './routes/ProtectedRoute';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Page />,
-    children: [
-      { index: true, element: <Welcome /> },
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "register",
-        element: <Register />,
-      },
-    ],
-  },
-]);
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <Page />,
+//     children: [
+//       { index: true, element: <Welcome /> },
+//       {
+//         path: "login",
+//         element: <ProtectedRoute authRequired={false} children={<Login />} />,
+//       },
+//       {
+//         path: "register",
+//         element: <ProtectedRoute authRequired={false} children={<Register />} />,
+//       },
+//       {
+//         path:"characters",
+//         element: <ProtectedRoute authRequired={true} children={<>characters page</>} />
+//       }
+//     ],
+//   },
+// ]);
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="" element={<Page />}>
+      <Route path="/" element={<Welcome />} />
+      <Route element={<OnlyUnauthRoutes />}>
+        <Route path="login/" element={<Login />} />
+        <Route path="register/" element={<Register />} />
+      </Route>
+
+      <Route element={<ProtectedRoutes />}>
+        <Route path="characters/" element={<>characters !!</>} />
+        <Route path="campaigns/" element={<>campaigns !!</>} />
+      </Route>
+    </Route>
+  ))
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

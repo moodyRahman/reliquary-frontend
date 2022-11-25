@@ -48,7 +48,7 @@ const Register = () => {
         username: body.username,
       })
     );
-    navigate("/campaigns");
+    navigate("/characters");
   };
 
   const validate = (e: MouseEvent) => {

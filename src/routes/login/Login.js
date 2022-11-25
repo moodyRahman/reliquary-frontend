@@ -38,7 +38,7 @@ const Login = () => {
     }
     setError("loading...")
     dispatch(setTokens({ refresh_token: body.refresh_token, access_token: body.access_token, username: body.username }))
-    navigate("/campaigns")
+    navigate("/characters")
   }
 
   const validate = (e) => {

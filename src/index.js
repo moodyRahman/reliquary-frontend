@@ -14,6 +14,7 @@ import { Provider } from 'react-redux'
 import Page from '@components/Page';
 import { Welcome, Login, Register } from "@routes/Routes"
 import { OnlyUnauthRoutes, ProtectedRoute, ProtectedRoutes } from './routes/ProtectedRoute';
+import Characters from './routes/characters/Characters';
 
 // const router = createBrowserRouter([
 //   {
@@ -47,7 +48,7 @@ const router = createBrowserRouter(
       </Route>
 
       <Route element={<ProtectedRoutes />}>
-        <Route path="characters/" element={<>characters !!</>} />
+        <Route path="characters/" element={<Characters />} />
         <Route path="campaigns/" element={<>campaigns !!</>} />
       </Route>
     </Route>

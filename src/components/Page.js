@@ -3,8 +3,8 @@ import "../styles/App.css"
 import Nav from "./Nav"
 
 const page = {
-    margin: "0px",
-    padding: "75px",
+    margin: "50px",
+    padding: "30px",
 }
 
 const Page = () => {

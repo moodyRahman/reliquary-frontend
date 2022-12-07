@@ -13,30 +13,8 @@ import store from './store'
 import { Provider } from 'react-redux'
 import Page from '@components/Page';
 import { Welcome, Login, Register } from "@routes/Routes"
-import { OnlyUnauthRoutes, ProtectedRoute, ProtectedRoutes } from './routes/ProtectedRoute';
+import { OnlyUnauthRoutes, ProtectedRoutes } from './routes/ProtectedRoute';
 import Characters from './routes/characters/Characters';
-
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <Page />,
-//     children: [
-//       { index: true, element: <Welcome /> },
-//       {
-//         path: "login",
-//         element: <ProtectedRoute authRequired={false} children={<Login />} />,
-//       },
-//       {
-//         path: "register",
-//         element: <ProtectedRoute authRequired={false} children={<Register />} />,
-//       },
-//       {
-//         path:"characters",
-//         element: <ProtectedRoute authRequired={true} children={<>characters page</>} />
-//       }
-//     ],
-//   },
-// ]);
 
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -1,6 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
-import { setAuth, setTokens } from "../../features/auth/authUpdate"
-import { increment } from "../../features/test/testUpdate"
+import { useDispatch } from "react-redux";
+import { setTokens } from "../../features/auth/authUpdate"
 import { Form, useNavigate } from "react-router-dom";
 import "./Login.css"
 import { captcha, CaptchaInfo } from "../../components/Captcha"

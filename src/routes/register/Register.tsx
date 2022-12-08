@@ -4,7 +4,7 @@ import { useState } from "react";
 import { captcha, CaptchaInfo } from "../../components/Captcha";
 import { MouseEvent } from "react";
 import Error from "../../components/Error";
-import { setTokens } from "../../features/auth/authUpdate";
+import { setTokens } from "../../features/authUpdate";
 import { useDispatch } from "react-redux";
 
 const Register = () => {

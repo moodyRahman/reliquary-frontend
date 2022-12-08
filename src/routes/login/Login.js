@@ -1,4 +1,4 @@
-import { setTokens } from "../../features/auth/authUpdate"
+import { setTokens } from "../../features/authUpdate"
 import { useDispatch } from "react-redux";
 import { Form, useNavigate } from "react-router-dom";
 import "./Login.css"

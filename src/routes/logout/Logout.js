@@ -1,4 +1,4 @@
-import { logout } from "../../features/auth/authUpdate"
+import { logout } from "../../features/authUpdate"
 import { useDispatch } from "react-redux";
 import { Form, useNavigate } from "react-router-dom";
 import {useEffect} from "react"

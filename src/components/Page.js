@@ -3,7 +3,7 @@ import "../styles/App.css"
 import { useEffect } from "react"
 import Nav from "./Nav"
 import { useSelector, useDispatch } from "react-redux"
-import { logout } from "../features/auth/authUpdate"
+import { logout } from "../features/authUpdate"
 
 const page = {
     margin: "50px",

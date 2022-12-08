@@ -2,7 +2,8 @@ import { Outlet } from "react-router-dom"
 import "../styles/App.css"
 import { useEffect } from "react"
 import Nav from "./Nav"
-import {useSelector} from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { logout } from "../features/auth/authUpdate"
 
 const page = {
     margin: "50px",
@@ -12,10 +13,11 @@ const page = {
 const Page = () => {
 
     const token = useSelector((state) => state.auth.accessToken)
-    
+    const dispatch = useDispatch()
+
     useEffect(() => {
 
-        const m = async () => {
+        (async () => {
 
             console.log(`${process.env.REACT_APP_BACKEND_URL}/auth/verify_token`)
             const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/verify_token`, {
@@ -28,12 +30,16 @@ const Page = () => {
                 }),
             })
 
-        }
+            const body = await res.json()
 
-        m()
+            if (body.status !== 200) {
+                dispatch(logout())
+            }
+
+        })()
 
         console.log("once")
-    }, [])
+    })
 
     return (
         <div>

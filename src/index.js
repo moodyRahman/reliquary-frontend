@@ -30,6 +30,7 @@ const router = createBrowserRouter(
         <Route path="characters/" element={<Characters />} />
         <Route path="campaigns/" element={<>campaigns !!</>} />
         <Route path="logout/" element={<Logout />} />
+        <Route path="waluigi/" element={<>waaaaaaaa</>} />
       </Route>
     </Route>
   ))

@@ -15,10 +15,11 @@ const Page = () => {
     const token = useSelector((state) => state.auth.accessToken)
     const dispatch = useDispatch()
 
+    /**
+     * check to see if the current token is valid, log out if so
+     */
     useEffect(() => {
-
         (async () => {
-
             console.log(`${process.env.REACT_APP_BACKEND_URL}/auth/verify_token`)
             const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/verify_token`, {
                 method: 'POST',
@@ -35,7 +36,6 @@ const Page = () => {
             if (body.status !== 200) {
                 dispatch(logout())
             }
-
         })()
 
         console.log("once")

@@ -9,12 +9,14 @@ import {
   createRoutesFromElements,
   Route
 } from "react-router-dom";
-import store from './store'
+import { store, persistor } from './store'
 import { Provider } from 'react-redux'
 import Page from '@components/Page';
 import { Welcome, Login, Register } from "@routes/Routes"
 import { OnlyUnauthRoutes, ProtectedRoutes } from './routes/ProtectedRoute';
 import Characters from './routes/characters/Characters';
+import { PersistGate } from "redux-persist/integration/react"
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,7 +38,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <PersistGate
+        loading={<>:0</>}
+        persistor={persistor}
+      >
+        <RouterProvider router={router} />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

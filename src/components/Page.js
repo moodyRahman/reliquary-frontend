@@ -39,7 +39,7 @@ const Page = () => {
         })()
 
         console.log("once")
-    })
+    }, [])
 
     return (
         <div>

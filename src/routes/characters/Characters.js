@@ -10,14 +10,7 @@ const Characters = () => {
     const [classtext,setClasstext] = useState("")
     const [loading, setLoading] = useState(true)
     const m = useSelector((state) => state.auth.accessToken)
-    
-    useEffect(() => {
-        console.log(m)
-    }, [m])
 
-
-
-    
     return loading?
         <div onClick={(e) => setLoading(false)}>loading...</div>:
     (

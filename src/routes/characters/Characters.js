@@ -11,24 +11,7 @@ const Characters = () => {
     const [classtext, setClasstext] = useState("")
     const [loading, setLoading] = useState(true)
     const token = useSelector((state) => state.auth.accessToken)
-
-    useEffect(() => {
-        (async () => {
-            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/resources/character/get`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    token: token
-                }),
-            })
-
-            const body = await res.json()
-
-            console.log(body)
-        })()
-    }, [loading, token])
+    const characters = useSelector((state) => state.characters.characters)
 
     const addCharacter = async (e) => {
         console.log(e)
@@ -48,9 +31,7 @@ const Characters = () => {
         })
 
         const body = await res.json()
-
         console.log(body)
-
     }
 
     return loading ?
@@ -63,6 +44,10 @@ const Characters = () => {
                 <button onClick={addCharacter}>create new character</button>
                 <pre style={{ whiteSpace: 'pre-wrap' }}>
                     {token}
+                </pre>
+
+                <pre>
+                    {JSON.stringify(characters, null, 4)}
                 </pre>
             </div>
         )

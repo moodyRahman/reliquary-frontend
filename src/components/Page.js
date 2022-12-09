@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import Nav from "./Nav"
 import { useSelector, useDispatch } from "react-redux"
 import { logout } from "../features/authUpdate"
+import { setCharacters } from "../features/UserDataUpdate"
 
 const page = {
     margin: "50px",
@@ -13,33 +14,37 @@ const page = {
 const Page = () => {
 
     const token = useSelector((state) => state.auth.accessToken)
+    const characters = useSelector((state) => state.characters.characters)
     const dispatch = useDispatch()
 
     /**
      * check to see if the current token is valid, log out if so
      */
+
     useEffect(() => {
-        (async () => {
-            console.log(`${process.env.REACT_APP_BACKEND_URL}/auth/verify_token`)
-            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/verify_token`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    token: token
-                }),
-            })
-
-            const body = await res.json()
-
-            if (body.status !== 200) {
-                dispatch(logout())
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/resources/character/get`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                token: token
+            }),
+        })
+        .then(res => {
+            if (res.status !== 200) {
+                throw new Error("bad token")
             }
-        })()
+            return res.json()
+        })
+        .then(body => {
+            dispatch(setCharacters(body))
+        })
+        .catch(e => {
+            console.log("bad token")
+        })
+    }, [dispatch, token, characters])
 
-        console.log("once")
-    }, [])
 
     return (
         <div>

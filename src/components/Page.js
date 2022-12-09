@@ -46,7 +46,7 @@ const Page = () => {
             dispatch(logout())
             console.log("bad token")
         })
-    }, [dispatch, token, characters])
+    }, [characters])
 
 
     return (

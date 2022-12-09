@@ -1,9 +1,8 @@
 
-import { useSelector } from "react-redux"
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { useSelector, useDispatch } from "react-redux"
+import { setCharacters } from "../../features/UserDataUpdate"
 const Characters = () => {
 
     const [name, setName] = useState("");
@@ -12,6 +11,8 @@ const Characters = () => {
     const [loading, setLoading] = useState(true)
     const token = useSelector((state) => state.auth.accessToken)
     const characters = useSelector((state) => state.characters.characters)
+
+    const dispatch = useDispatch()
 
     const addCharacter = async (e) => {
         console.log(e)
@@ -32,6 +33,7 @@ const Characters = () => {
 
         const body = await res.json()
         console.log(body)
+        dispatch(setCharacters([...characters]))
     }
 
     return loading ?

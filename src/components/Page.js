@@ -2,8 +2,8 @@ import { Outlet } from "react-router-dom"
 import "../styles/App.css"
 import { useEffect } from "react"
 import Nav from "./Nav"
-import { useSelector, useDispatch } from "react-redux"
 import { logout } from "../features/authUpdate"
+import { useSelector, useDispatch } from "react-redux"
 import { setCharacters } from "../features/UserDataUpdate"
 
 const page = {
@@ -20,7 +20,7 @@ const Page = () => {
     /**
      * check to see if the current token is valid, log out if so
      */
-
+    console.log("in da page")
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/resources/character/get`, {
             method: 'POST',
@@ -38,9 +38,12 @@ const Page = () => {
             return res.json()
         })
         .then(body => {
-            dispatch(setCharacters(body))
+            if (body.length !== characters.length) {
+                dispatch(setCharacters(body))
+            }
         })
         .catch(e => {
+            dispatch(logout())
             console.log("bad token")
         })
     }, [dispatch, token, characters])

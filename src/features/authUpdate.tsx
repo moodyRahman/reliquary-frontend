@@ -11,10 +11,10 @@ interface authState {
 
 const initialState: authState = {
     accessToken: "",
-        refreshToken: "",
-        isLoggedIn: false,
-        oauthserver: "",
-        username: ""
+    refreshToken: "",
+    isLoggedIn: false,
+    oauthserver: "",
+    username: ""
 }
 
 export const authSlice = createSlice({

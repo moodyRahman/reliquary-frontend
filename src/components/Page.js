@@ -3,8 +3,9 @@ import "../styles/App.css"
 import { useEffect } from "react"
 import Nav from "./Nav"
 import { logout } from "../features/authUpdate"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector, useDispatch, shallowEqual } from "react-redux"
 import { setCharacters } from "../features/UserDataUpdate"
+import {isEqual} from "lodash"
 
 const page = {
     margin: "50px",
@@ -31,22 +32,23 @@ const Page = () => {
                 token: token
             }),
         })
-        .then(res => {
-            if (res.status !== 200) {
-                throw new Error("bad token")
-            }
-            return res.json()
-        })
-        .then(body => {
-            if (body.length > characters.length) {
-                console.log(body)
-                dispatch(setCharacters(body))
-            }
-        })
-        .catch(e => {
-            dispatch(logout())
-            console.log("bad token")
-        })
+            .then(res => {
+                console.log("did the big fetch")
+                if (res.status !== 200) {
+                    throw new Error("bad token")
+                }
+                return res.json()
+            })
+            .then(body => {
+                if (!isEqual(body, characters)) {
+                    console.log(body)
+                    dispatch(setCharacters(body))
+                }
+            })
+            .catch(e => {
+                dispatch(logout())
+                console.log("bad token")
+            })
     }, [characters, token])
 
 

@@ -14,7 +14,7 @@ export const userDataSlice = createSlice({
     initialState: initialState,
     reducers: {
         setCharacters: (state, action:PayloadAction<any>) => {
-            state.characters = action.payload;
+            state.characters = [...action.payload];
         },
     },
 })

@@ -96,7 +96,7 @@ const Character = () => {
     const ItemBox = ({ item }) => {
         const { name, description, tags } = item
         return (
-            <div>
+            <div style={{ background: "#00008b", margin: "15px", padding: "15px", color: "white" }}>
                 {name}, {description}, {tags}
             </div>
         )
@@ -104,14 +104,21 @@ const Character = () => {
 
     return (
         <div>
+
+            <div style={{width:"50%"}}>
+
+                {(char?.items !== undefined ? [...char?.items].reverse() : []).map((e, i) => {
+                    return (
+                        <ItemBox item={e} key={i} />
+                    )
+                })}
+            </div>
+
+
             <input type="text" placeholder="item name" ref={nameRef} onChange={(e) => { setiname(e.target.value) }} />
             <input type="text" placeholder="item description" ref={descRef} onChange={(e) => { setidesc(e.target.value) }} />
             <Tags state={itags} update={setitags} />
             <button style={{ marginTop: "15px" }} onClick={newItem}>create new item</button>
-
-            <pre style={{ width: "50%", wordWrap: "break-word" }}>
-                {JSON.stringify((char?.items!==undefined?[...char?.items].reverse():[]), null, 4)}
-            </pre>
 
         </div>)
 }

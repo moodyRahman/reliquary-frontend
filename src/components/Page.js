@@ -20,8 +20,8 @@ const Page = () => {
     /**
      * check to see if the current token is valid, log out if so
      */
-    console.log("in da page")
     useEffect(() => {
+        console.log("in da page")
         fetch(`${process.env.REACT_APP_BACKEND_URL}/resources/character/get`, {
             method: 'POST',
             headers: {
@@ -38,7 +38,8 @@ const Page = () => {
             return res.json()
         })
         .then(body => {
-            if (body.length !== characters.length) {
+            if (body.length > characters.length) {
+                console.log(body)
                 dispatch(setCharacters(body))
             }
         })
@@ -46,7 +47,7 @@ const Page = () => {
             dispatch(logout())
             console.log("bad token")
         })
-    }, [characters])
+    }, [characters, token])
 
 
     return (

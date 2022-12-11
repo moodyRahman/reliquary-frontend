@@ -3,12 +3,14 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
 import { setCharacters } from "../../features/UserDataUpdate"
+import { Link } from "react-router-dom"
+import "./Characters.css"
 const Characters = () => {
 
     const [name, setName] = useState("");
     const [description, setDescription,] = useState("")
     const [classtext, setClasstext] = useState("")
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const token = useSelector((state) => state.auth.accessToken)
     const characters = useSelector((state) => state.characters.characters)
 
@@ -20,6 +22,7 @@ const Characters = () => {
 
 
     const addCharacter = async (e) => {
+        setLoading(true)
         console.log(nameRef)
         console.log(classRef)
         console.log(descriptionRef)
@@ -45,34 +48,39 @@ const Characters = () => {
         const body = await res.json()
         console.log(body)
         dispatch(setCharacters([...characters]))
+
+        setTimeout(() => {
+            setLoading(false)
+        }, 500)
     }
 
-    const CharacterBox = ({name, class:Cname}) => {
+    const CharacterBox = ({ name, class: Cname, id }) => {
         return (
-            <>{name} {Cname} <br /></>
+            <Link to={`/characters/${id}`}>
+                <div className="characters">
+                    {name} {Cname}
+                </div>
+            </Link>
         )
     }
 
     return loading ?
-        <div onClick={(e) => setLoading(false)}>loading...</div> :
+        <div>loading...</div> :
         (
             <>
-                <pre>
-                    {characters.map((c, i) => 
-                        <CharacterBox name={c.name} class={c.class} key={i} />
+                <div className="characters-container">
+                    {characters.map((c, i) =>
+                        <CharacterBox name={c.name} class={c.class} id={c._id} key={i} />
                     )}
-                </pre>
-                <pre>
-                    {JSON.stringify(characters, null, 4)}
-                </pre>
+                </div>
                 <div>
-                    <input type="text" ref={nameRef} placeholder="name" name="name" onChange={(e) => {setName(e.target.value)}} />
+                    <input type="text" ref={nameRef} placeholder="name" name="name" onChange={(e) => { setName(e.target.value) }} />
                     <input type="text" ref={classRef} placeholder="class" name="class" onChange={(e) => setClasstext(e.target.value)} />
                     <input type="text" ref={descriptionRef} placeholder="description" name="description" onChange={(e) => setDescription(e.target.value)} />
                     <button onClick={addCharacter}>create new character</button>
-                    <pre style={{ whiteSpace: 'pre-wrap' }}>
+                    <div style={{ width: "50%", wordWrap: "break-word" }}>
                         {token}
-                    </pre>
+                    </div>
                 </div>
             </>
         )

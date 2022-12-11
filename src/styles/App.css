@@ -2,8 +2,9 @@ html {
   @import url('"https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200&display=swap"');
   box-sizing: border-box;
 }
+
 *, *:before, *:after {
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
 body {

@@ -79,9 +79,9 @@ const Characters = () => {
                     <input type="text" ref={classRef} placeholder="class" name="class" onChange={(e) => setClasstext(e.target.value)} />
                     <input type="text" ref={descriptionRef} placeholder="description" name="description" onChange={(e) => setDescription(e.target.value)} />
                     <button onClick={addCharacter}>create new character</button>
-                    <div style={{ width: "50%", wordWrap: "break-word" }}>
+                    {process.env.NODE_ENV === "development"?<div style={{ width: "50%", wordWrap: "break-word" }}>
                         {token}
-                    </div>
+                    </div>:<></>}
                 </div>
             </>
         )

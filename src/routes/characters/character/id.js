@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { setCharacters } from "../../../features/UserDataUpdate"
@@ -13,20 +13,38 @@ const Character = () => {
 
     const [iname, setiname] = useState("")
     const [idesc, setidesc] = useState("")
+    const [itags, setitags] = useState([])
+
 
     useEffect(()=>{
         console.log("checked the url lol")
         if (characters.find(e => e._id === id) === undefined) {
-            // navigate("../")
+            navigate("/characters")
         }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
 
-    const Tags = () => {
+    const Tags = ({state, update}) => {
+
+        const inRef = useRef(null)
+
+
         return (
             <div>
-                here is the tag section
+                {state.map((e, i) => {
+                    return (
+                        <span key={i}>{e}, </span>
+                    )
+                })}
+                <input ref={inRef} placeholder="add a new tag" />
+                <button onClick={e => {
+                    console.log(state)
+                    if (inRef.current.value.trim() === "") {
+                        return
+                    }
+                    update([...state, inRef.current.value ])
+                }}>add tag</button>
             </div>
         )
     }
@@ -42,7 +60,7 @@ const Character = () => {
                 token: token,
                 name:iname,
                 description:idesc,
-                tags:[]
+                tags:itags
             }),
         })
         if (res.status !== 200) {
@@ -69,8 +87,8 @@ const Character = () => {
             </pre>
             <input type="text" placeholder="item name" name="iname" onChange={(e) => { setiname(e.target.value) }} />
             <input type="text" placeholder="item description" name="idesc" onChange={(e) => { setidesc(e.target.value) }} />
-            <button onClick={newItem}>create new item</button>
-            <Tags />
+            <Tags state={itags} update={setitags} />
+            <button style={{marginTop:"15px"}} onClick={newItem}>create new item</button>
 
         </div>)
 }

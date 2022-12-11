@@ -10,7 +10,7 @@ const Compendium = () => {
                 </div>
             </Link>
             <div>
-                search monsters
+                search monsters (TBA)
             </div>
         </div>
     )

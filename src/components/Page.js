@@ -3,7 +3,7 @@ import "../styles/App.css"
 import { useEffect } from "react"
 import Nav from "./Nav"
 import { logout } from "../features/authUpdate"
-import { useSelector, useDispatch, shallowEqual } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { setCharacters } from "../features/UserDataUpdate"
 import {isEqual} from "lodash"
 

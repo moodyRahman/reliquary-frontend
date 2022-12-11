@@ -11,6 +11,7 @@ const Characters = () => {
     const [description, setDescription,] = useState("")
     const [classtext, setClasstext] = useState("")
     const [loading, setLoading] = useState(false)
+
     const token = useSelector((state) => state.auth.accessToken)
     const characters = useSelector((state) => state.characters.characters)
 

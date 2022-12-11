@@ -56,11 +56,18 @@ const Spells = () => {
 
     const Paginate = () => {
         const style = {
-            margin: "5px"
+            margin: "5px",
+            flexbasis:"10%" /* explanation below */
+        }
+
+        const container = {
+            display:"flex",
+            flexWrap:"wrap",
+            width:"50%"
         }
         return (
-            <div>
-                {[...Array((totalSpells / 10) | 0).keys()].map((e, i) => { return <><span onClick={(evt) => {setPage(i + 1); }} style={style}>{i+1}</span> {(i+1)%10 === 0?<br />:<></>}</> })}
+            <div style={container}>
+                {[...Array((totalSpells / 10) | 0).keys()].map((e, i) => { return <span onClick={(evt) => {setPage(i + 1); }} style={style}>{i+1}</span> })}
             </div>
         )
     }

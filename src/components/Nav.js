@@ -40,6 +40,10 @@ const Nav = () => {
                 name: "logout",
                 to: "/logout"
             },
+            {
+                name: "compendium",
+                to: "/compendium"
+            },
         ]
     }
 

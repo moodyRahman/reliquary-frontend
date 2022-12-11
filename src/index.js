@@ -11,7 +11,10 @@ import {
 import { store, persistor } from './store'
 import { Provider } from 'react-redux'
 import Page from '@components/Page';
-import { Welcome, Login, Register, Logout, Characters, Character } from "@routes/Routes"
+import { 
+  Welcome, Login, Register, 
+  Logout, Characters, Character, 
+  Compendium, Spells } from "@routes/Routes"
 import { OnlyUnauthRoutes, ProtectedRoutes } from './routes/ProtectedRoute';
 import { PersistGate } from "redux-persist/integration/react"
 
@@ -25,11 +28,20 @@ const router = createBrowserRouter(
       </Route>
 
       <Route element={<ProtectedRoutes />}>
-        <Route path="characters/" element={<Characters />} />
-        <Route path="characters/:id" element={<Character />} />
+
+        <Route path="characters/">
+          <Route path="" element={<Characters />} />
+          <Route path=":id/" element={<Character />} />
+        </Route>
         <Route path="campaigns/" element={<>campaigns !!</>} />
         <Route path="logout/" element={<Logout />} />
+        <Route path="compendium/">
+          <Route path="" element={<Compendium />} />
+          <Route path="spells/" element={<Spells />} />
+
+        </Route>
         <Route path="waluigi/" element={<>waaaaaaaa</>} />
+
       </Route>
     </Route>
   ))

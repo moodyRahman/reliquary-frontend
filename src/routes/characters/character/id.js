@@ -36,9 +36,6 @@ const Character = () => {
 
     const Tags = ({ state, update }) => {
 
-        const inRef = useRef(null)
-
-
         return (
             <div>
                 <div ref={tagdispRef}>
@@ -49,14 +46,17 @@ const Character = () => {
                         )
                     })}
                 </div>
-                <input ref={tagRef} placeholder="add a new tag" />
-                <button onClick={e => {
-                    console.log(state)
-                    if (tagRef.current.value.trim() === "") {
-                        return
-                    }
-                    update([...state, tagRef.current.value])
-                }}>add tag</button>
+                <div style={{ display: "flex" }}>
+                    <input style={{ width: "25%" }} ref={tagRef} placeholder="add a new tag" />
+
+                    <button style={{ margin: "15px" }} onClick={e => {
+                        console.log(state)
+                        if (tagRef.current.value.trim() === "") {
+                            return
+                        }
+                        update([...state, tagRef.current.value])
+                    }}>add tag</button>
+                </div>
             </div>
         )
     }
@@ -92,12 +92,22 @@ const Character = () => {
 
     }
 
+    const getAllTags = (inventory) => {
+        console.log(inventory)
+    }
+
 
     const ItemBox = ({ item }) => {
         const { name, description, tags } = item
         return (
             <div style={{ background: "#00008b", margin: "15px", padding: "15px", color: "white" }}>
-                {name}, {description}, {tags}
+
+                <div>
+                    {name} | {tags.join(", ")}
+                </div>
+                <div>
+                    {description}
+                </div>
             </div>
         )
     }
@@ -105,7 +115,7 @@ const Character = () => {
     return (
         <div>
 
-            <div style={{width:"50%"}}>
+            <div style={{ width: "50%" }}>
 
                 {(char?.items !== undefined ? [...char?.items].reverse() : []).map((e, i) => {
                     return (
@@ -117,8 +127,8 @@ const Character = () => {
 
             <input type="text" placeholder="item name" ref={nameRef} onChange={(e) => { setiname(e.target.value) }} />
             <input type="text" placeholder="item description" ref={descRef} onChange={(e) => { setidesc(e.target.value) }} />
-            <Tags state={itags} update={setitags} />
-            <button style={{ marginTop: "15px" }} onClick={newItem}>create new item</button>
+            <Tags style={{ width: "25%" }} state={itags} update={setitags} />
+            <button style={{ marginTop: "15px", display: "inline" }} onClick={newItem}>create new item</button>
 
         </div>)
 }

@@ -25,13 +25,9 @@ const Character = () => {
     useEffect(() => {
         console.log("checked the url lol")
         console.log(characters)
-        // if (characters.find(e => e._id === id) === undefined) {
-        //     navigate("/characters")
-        // }
 
         setChar(characters.find(e => e._id === id))
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, characters])
 
     const Tags = ({ state, update }) => {
@@ -40,11 +36,7 @@ const Character = () => {
             <div>
                 <div ref={tagdispRef}>
 
-                    {state.map((e, i) => {
-                        return (
-                            <span key={i}>{e}, </span>
-                        )
-                    })}
+                    {state.join(", ")}
                 </div>
                 <div style={{ display: "flex" }}>
                     <input style={{ width: "25%" }} ref={tagRef} placeholder="add a new tag" />
@@ -114,8 +106,10 @@ const Character = () => {
 
     return (
         <div>
+            <h3>Welcome {char.name}, o' {char.class}</h3>
 
             <div style={{ width: "50%" }}>
+                Create a new item:
 
                 {(char?.items !== undefined ? [...char?.items].reverse() : []).map((e, i) => {
                     return (

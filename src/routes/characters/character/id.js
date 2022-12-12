@@ -23,10 +23,11 @@ const Character = () => {
 
 
     useEffect(() => {
-        console.log("checked the url lol")
-        console.log(characters)
-
-        setChar(characters.find(e => e._id === id))
+        const z = characters.find(e => e._id === id);
+        if (z===undefined) {
+            navigate("/characters")
+        }
+        setChar(z)
 
     }, [id, characters])
 

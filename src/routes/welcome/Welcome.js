@@ -7,7 +7,7 @@ const Welcome = () => {
   return (
     <div>
       <div className="logo">
-        domo
+        yoooooo jenkins did the thing
       </div>
       <div>
         {/* <Link to="/login">Login</Link> */}
